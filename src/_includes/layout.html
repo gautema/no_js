@@ -10,19 +10,49 @@
     <main>{{ content }}</main>
 
     {% if prevSlide %}
-    <a href="{{ prevSlide }}" class="nav-arrow nav-prev" aria-label="Previous slide">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <a
+      href="{{ prevSlide }}"
+      class="nav-arrow nav-prev"
+      aria-label="Previous slide"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
         <polyline points="15 18 9 12 15 6"></polyline>
       </svg>
     </a>
-    {% endif %}
-
-    {% if nextSlide %}
-    <a href="{{ nextSlide }}" class="nav-arrow nav-next" aria-label="Next slide">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    {% endif %} {% if nextSlide %}
+    <a
+      href="{{ nextSlide }}"
+      class="nav-arrow nav-next"
+      aria-label="Next slide"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
         <polyline points="9 18 15 12 9 6"></polyline>
       </svg>
     </a>
     {% endif %}
+
+    <script>
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft" && "{{ prevSlide }}") {
+          window.location.href = "{{ prevSlide }}";
+        } else if (e.key === "ArrowRight" && "{{ nextSlide }}") {
+          window.location.href = "{{ nextSlide }}";
+        }
+      });
+    </script>
   </body>
 </html>
