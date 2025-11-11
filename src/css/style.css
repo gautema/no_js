@@ -178,6 +178,51 @@ main {
   }
 }
 
+/* Custom Prism theme overrides for pink background */
+pre[class*="language-"] {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 2px solid rgba(22, 21, 21, 0.08);
+  box-shadow: 0 2px 8px rgba(22, 21, 21, 0.05);
+}
+
+code[class*="language-"] {
+  color: #161515;
+  text-shadow: none;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #d73a49;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #005cc5;
+}
+
+.token.punctuation {
+  color: #24292e;
+}
+
+.token.function,
+.token.class-name {
+  color: #6f42c1;
+}
+
+.token.atrule,
+.token.keyword {
+  color: #d73a49;
+}
+
 /* Keyboard navigation hint */
 @media (hover: hover) {
   .nav-arrow::after {

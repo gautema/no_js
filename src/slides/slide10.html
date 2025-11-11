@@ -1,0 +1,59 @@
+---
+layout: layout.html
+prevSlide: /slides/slide9/
+nextSlide: /slides/slide11/
+---
+
+<div class="slide">
+  <h1>Enda flere CSS features</h1>
+
+  <pre><code class="language-css">/* :has() - parent selector! */
+.card:has(img) {
+  display: grid;
+}
+
+/* aspect-ratio */
+.video {
+  aspect-ratio: 16 / 9;
+}
+
+/* color-mix() */
+color: color-mix(in srgb, blue 50%, red);
+
+/* Cascade layers */
+@layer reset, components, utilities;
+
+/* :is() and :where() */
+:is(h1, h2, h3):hover {
+  color: blue;
+}
+
+/* Subgrid */
+.grid-item {
+  display: grid;
+  grid-template-columns: subgrid;
+}</code></pre>
+
+  <style>
+    .slide h1 {
+      margin-bottom: 1.5rem;
+      font-size: 3rem;
+    }
+
+    .slide pre {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: left;
+      max-width: 800px;
+      margin: 0;
+      overflow-x: auto;
+    }
+
+    code {
+      font-family: "Monaco", "Courier New", monospace;
+      font-size: 0.7rem;
+      line-height: 1.5;
+    }
+  </style>
+</div>

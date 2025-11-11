@@ -1,0 +1,52 @@
+---
+layout: layout.html
+prevSlide: /slides/slide7/
+nextSlide: /slides/slide9/
+---
+
+<div class="slide">
+  <h1>View Transitions</h1>
+
+  <p>Animasjonene du ser når du bytter slide</p>
+
+  <pre><code class="language-css">.slide {
+  animation: slide-in-bounce 0.6s
+    cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slide-in-bounce {
+  0% {
+    transform: translateY(50px)
+      scale(0.95) rotate(2deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0)
+      scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}</code></pre>
+
+  <style>
+    .slide p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.8;
+    }
+
+    pre {
+      background: rgba(22, 21, 21, 0.05);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: left;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    code {
+      font-family: "Monaco", "Courier New", monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+  </style>
+</div>
