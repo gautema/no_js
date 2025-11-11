@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for no-js-presentation on 2025-11-11T14:17:03+01:00
+# fly.toml app configuration file generated for no-js-presentation-muddy-glade-5649 on 2025-11-11T14:31:47+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'no-js-presentation'
+app = 'no-js-presentation-muddy-glade-5649'
 primary_region = 'ams'
 
 [build]
