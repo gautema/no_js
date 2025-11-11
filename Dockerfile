@@ -26,6 +26,7 @@ RUN bun install --production
 
 # Copy built site and proxy server from builder
 COPY --from=builder /app/_site ./_site
+COPY --from=builder /app/src ./src
 COPY proxy-server.js ./
 
 # Expose port

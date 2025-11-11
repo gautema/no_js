@@ -12,15 +12,15 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const templates = {
-  quote: Handlebars.compile(fs.readFileSync("src/templates/quote.html", "utf8")),
-  people: Handlebars.compile(fs.readFileSync("src/templates/people.html", "utf8")),
-  editPerson: Handlebars.compile(fs.readFileSync("src/templates/edit-person.html", "utf8")),
-  addPerson: Handlebars.compile(fs.readFileSync("src/templates/add-person.html", "utf8")),
-  personRow: Handlebars.compile(fs.readFileSync("src/templates/person-row.html", "utf8")),
-  toast: Handlebars.compile(fs.readFileSync("src/templates/toast.html", "utf8")),
-  personNotFoundP: Handlebars.compile(fs.readFileSync("src/templates/person-not-found-p.html", "utf8")),
-  personNotFoundTr: Handlebars.compile(fs.readFileSync("src/templates/person-not-found-tr.html", "utf8")),
-  emptyPopover: Handlebars.compile(fs.readFileSync("src/templates/empty-popover.html", "utf8")),
+  quote: Handlebars.compile(fs.readFileSync(path.join(__dirname, "src/templates/quote.html"), "utf8")),
+  people: Handlebars.compile(fs.readFileSync(path.join(__dirname, "src/templates/people.html"), "utf8")),
+  editPerson: Handlebars.compile(fs.readFileSync(path.join(__dirname, "src/templates/edit-person.html"), "utf8")),
+  addPerson: Handlebars.compile(fs.readFileSync(path.join(__dirname, "src/templates/add-person.html"), "utf8")),
+  personRow: Handlebars.compile(fs.readFileSync(path.join(__dirname, "src/templates/person-row.html"), "utf8")),
+  toast: Handlebars.compile(fs.readFileSync(path.join(__dirname, "src/templates/toast.html"), "utf8")),
+  personNotFoundP: Handlebars.compile(fs.readFileSync(path.join(__dirname, "src/templates/person-not-found-p.html"), "utf8")),
+  personNotFoundTr: Handlebars.compile(fs.readFileSync(path.join(__dirname, "src/templates/person-not-found-tr.html"), "utf8")),
+  emptyPopover: Handlebars.compile(fs.readFileSync(path.join(__dirname, "src/templates/empty-popover.html"), "utf8")),
 };
 
 // Parse JSON and URL-encoded bodies
