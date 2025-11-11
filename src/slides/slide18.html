@@ -1,0 +1,76 @@
+---
+layout: layout.html
+prevSlide: /slides/slide17/
+nextSlide: /slides/slide19/
+---
+
+<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+
+<style>
+  .htmx-demo-container {
+    margin: 2rem 0;
+  }
+
+  .htmx-btn {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .htmx-btn:hover {
+    background: #2563eb;
+  }
+
+  #htmx-result {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: #f3f4f6;
+    border-radius: 8px;
+    min-height: 50px;
+  }
+
+  .htmx-indicator {
+    display: none;
+    color: #6b7280;
+  }
+
+  .htmx-request .htmx-indicator {
+    display: inline;
+  }
+</style>
+
+<div class="slide">
+  <h1>HTMX - Henting uten JS</h1>
+
+  <p class="htmx-intro">Deklarativ datainnhenting med HTML attributter</p>
+
+  <div class="htmx-demo-container">
+    <button
+      class="htmx-btn"
+      hx-get="/api/quote"
+      hx-target="#htmx-result"
+      hx-swap="innerHTML">
+      Hent sitat
+      <span class="htmx-indicator">...</span>
+    </button>
+
+    <div id="htmx-result">
+      <p style="color: #6b7280;">Klikk knappen for å hente et sitat</p>
+    </div>
+  </div>
+
+  <pre><code class="language-html">&lt;button hx-get="/api/quote"
+        hx-target="#result"
+        hx-swap="innerHTML"&gt;
+  Hent sitat
+&lt;/button&gt;
+
+&lt;div id="result"&gt;&lt;/div&gt;
+
+&lt;!-- HTMX handles the fetch and DOM update! --&gt;</code></pre>
+</div>

@@ -1,0 +1,54 @@
+---
+layout: layout.html
+prevSlide: /slides/slide22/
+nextSlide: /slides/slide24/
+---
+
+<div class="slide">
+  <h1>Performance</h1>
+
+  <table style="width: 100%; border-collapse: collapse; margin: 2rem 0;">
+    <thead>
+      <tr style="background: #f3f4f6;">
+        <th style="padding: 0.75rem; text-align: left; border: 1px solid #ddd; font-size: 0.95rem;">Metrikk</th>
+        <th style="padding: 0.75rem; text-align: center; border: 1px solid #ddd; font-size: 0.95rem;">HTMX/SSR</th>
+        <th style="padding: 0.75rem; text-align: center; border: 1px solid #ddd; font-size: 0.95rem;">Next.js/Nuxt</th>
+        <th style="padding: 0.75rem; text-align: center; border: 1px solid #ddd; font-size: 0.95rem;">React SPA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; font-size: 0.9rem;">Bundle Size</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #dcfce7; font-size: 0.9rem;">~15-50 KB</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #fef3c7; font-size: 0.9rem;">~100-200 KB</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #fecaca; font-size: 0.9rem;">~200-500 KB</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; font-size: 0.9rem;">Time to Interactive</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #dcfce7; font-size: 0.9rem;">~0.5s</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #fef3c7; font-size: 0.9rem;">~1-2s</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #fecaca; font-size: 0.9rem;">~2-4s</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; font-size: 0.9rem;">First Contentful Paint</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #dcfce7; font-size: 0.9rem;">~0.3s</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #fef3c7; font-size: 0.9rem;">~0.5s</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #fecaca; font-size: 0.9rem;">~1-2s</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; font-size: 0.9rem;">SEO</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #dcfce7; font-size: 0.9rem;">Utmerket</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #dcfce7; font-size: 0.9rem;">Utmerket</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #fecaca; font-size: 0.9rem;">Dårlig*</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; font-size: 0.9rem;">Kompleksitet</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #dcfce7; font-size: 0.9rem;">Lav</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #fecaca; font-size: 0.9rem;">Høy</td>
+        <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; background: #fef3c7; font-size: 0.9rem;">Medium</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="conclusion">Raskere lasting, mindre JavaScript!</p>
+</div>

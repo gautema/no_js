@@ -748,3 +748,129 @@ dialog p {
   line-height: 1.6;
   font-size: 1.1rem;
 }
+
+/* JS needed slide (slide 17) */
+.js-needed-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 2rem;
+}
+
+.need-item {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid rgba(22, 21, 21, 0.1);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.need-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--dark);
+}
+
+.need-item h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.3rem;
+  color: var(--dark);
+}
+
+.need-item p {
+  margin: 0;
+  color: var(--dark);
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+.conclusion {
+  font-size: 1.2rem;
+  font-weight: 600;
+  max-width: 700px;
+  line-height: 1.6;
+  color: var(--dark);
+  margin: 0;
+}
+
+/* HTMX demo slide (slide 18) */
+.htmx-intro {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.htmx-popover {
+  max-width: 90vw !important;
+  width: 1200px !important;
+  height: 80vh !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.close-btn-popover {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: var(--dark);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn-popover:hover {
+  transform: scale(1.1);
+}
+
+.demo-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+
+/* Datastar demo slide (slide 19) */
+.slide-datastar {
+  padding: 2rem;
+}
+
+.slide-datastar h1 {
+  margin-bottom: 2rem;
+}
+
+#bad-apple-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.apple-frame {
+  background: #000;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 2px solid var(--dark);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.apple-frame pre {
+  color: #fff;
+  white-space: pre;
+  overflow: hidden;
+}

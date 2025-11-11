@@ -5,9 +5,16 @@
   "description": "HTML/CSS presentation with Eleventy",
   "scripts": {
     "dev": "eleventy --serve",
+    "proxy": "node proxy-server.js",
+    "dev:all": "concurrently \"npm run dev\" \"npm run proxy\"",
     "build": "eleventy"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0"
+    "@11ty/eleventy": "^3.0.0",
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^2.0.6"
   }
 }
