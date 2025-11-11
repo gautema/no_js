@@ -1,8 +1,13 @@
 import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // Enable CORS for all routes
 app.use((req, res, next) => {
@@ -17,6 +22,9 @@ app.use((req, res, next) => {
 
   next();
 });
+
+// Serve static files from _site directory
+app.use(express.static(path.join(__dirname, '_site')));
 
 // Quote endpoint for HTMX demo
 const quotes = [
