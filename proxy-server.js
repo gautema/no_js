@@ -17,6 +17,10 @@ const templates = {
   editPerson: Handlebars.compile(fs.readFileSync("src/templates/edit-person.html", "utf8")),
   addPerson: Handlebars.compile(fs.readFileSync("src/templates/add-person.html", "utf8")),
   personRow: Handlebars.compile(fs.readFileSync("src/templates/person-row.html", "utf8")),
+  toast: Handlebars.compile(fs.readFileSync("src/templates/toast.html", "utf8")),
+  personNotFoundP: Handlebars.compile(fs.readFileSync("src/templates/person-not-found-p.html", "utf8")),
+  personNotFoundTr: Handlebars.compile(fs.readFileSync("src/templates/person-not-found-tr.html", "utf8")),
+  emptyPopover: Handlebars.compile(fs.readFileSync("src/templates/empty-popover.html", "utf8")),
 };
 
 // Parse JSON and URL-encoded bodies
@@ -72,7 +76,7 @@ app.get("/api/people", (req, res) => {
 app.get("/api/people/:id/edit", (req, res) => {
   const person = people.find((p) => p.id === parseInt(req.params.id));
   if (!person) {
-    return res.status(404).send("<p>Person ikke funnet</p>");
+    return res.status(404).send(templates.personNotFoundP());
   }
 
   const template = Handlebars.compile(fs.readFileSync("src/templates/edit-person.html", "utf8"));
@@ -83,7 +87,7 @@ app.get("/api/people/:id/edit", (req, res) => {
 app.get("/api/close-popover/:type", (req, res) => {
   const type = req.params.type;
   const popoverId = type === "edit" ? "edit-popover" : "add-popover";
-  res.send(`<div id="${popoverId}"></div>`);
+  res.send(templates.emptyPopover({ popoverId }));
 });
 
 // Get add form (popover content)
@@ -98,12 +102,11 @@ app.post("/api/people", (req, res) => {
   const newPerson = { id: nextId++, name, email, role };
   people.push(newPerson);
 
-  const template = Handlebars.compile(fs.readFileSync("src/templates/person-row.html", "utf8"));
-  const html = template({ person: newPerson });
+  const personRowHtml = templates.personRow({ person: newPerson });
+  const toastHtml = templates.toast({ name: newPerson.name, message: "ble lagt til!" });
+  const popoverHtml = templates.emptyPopover({ popoverId: "add-popover" });
 
-  res.send(`${html}
-<div hx-swap-oob="beforeend:#toast-container"><div class="toast success"><strong>${newPerson.name}</strong> ble lagt til!</div></div>
-<div id="add-popover" hx-swap-oob="outerHTML"></div>`);
+  res.send(personRowHtml + toastHtml + popoverHtml);
 });
 
 // Update a person
@@ -114,20 +117,19 @@ app.put("/api/people/:id", (req, res) => {
   if (!person) {
     return res
       .status(404)
-      .send('<tr><td colspan="4">Person ikke funnet</td></tr>');
+      .send(templates.personNotFoundTr());
   }
 
   person.name = req.body.name || person.name;
   person.email = req.body.email || person.email;
   person.role = req.body.role || person.role;
 
-  const template = Handlebars.compile(fs.readFileSync("src/templates/person-row.html", "utf8"));
-  const html = template({ person });
+  const personRowHtml = templates.personRow({ person });
+  const toastHtml = templates.toast({ name: person.name, message: "ble oppdatert!" });
+  const popoverHtml = templates.emptyPopover({ popoverId: "edit-popover" });
 
   // Close the popover and return updated row
-  res.send(`${html}
-<div hx-swap-oob="beforeend:#toast-container"><div class="toast success"><strong>${person.name}</strong> ble oppdatert!</div></div>
-<div id="edit-popover" hx-swap-oob="outerHTML"></div>`);
+  res.send(personRowHtml + toastHtml + popoverHtml);
 });
 
 // Delete a person
@@ -137,8 +139,7 @@ app.delete("/api/people/:id", (req, res) => {
   const personName = person ? person.name : "Person";
   people = people.filter((p) => p.id !== id);
 
-  res.send(`<template></template>
-<div hx-swap-oob="beforeend:#toast-container"><div class="toast success"><strong>${personName}</strong> ble slettet!</div></div>`);
+  res.send(templates.toast({ name: personName, message: "ble slettet!" }));
 });
 
 // Track active connections to prevent rate limiting
