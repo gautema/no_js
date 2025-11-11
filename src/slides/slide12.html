@@ -5,29 +5,45 @@ nextSlide: /slides/slide13/
 ---
 
 <div class="slide">
-  <h1>&lt;dialog&gt; - Native modals</h1>
+  <h1>&lt;dialog&gt; and &lt;popover&gt;</h1>
 
-  <button class="open-dialog-btn" onclick="document.getElementById('demo-dialog').showModal()">
-    Åpne dialog
-  </button>
+  <div class="comparison-grid">
+    <div class="comparison-item">
+      <h2>Dialog - Modal</h2>
+      <p>Blokkerer siden. Krever handling.</p>
+      <button
+        class="open-dialog-btn"
+        onclick="document.getElementById('demo-dialog').showModal()"
+      >
+        Åpne dialog
+      </button>
+    </div>
+
+    <div class="comparison-item">
+      <h2>Popover - Light</h2>
+      <p>Lett å lukke. Ekstra info.</p>
+      <button popovertarget="info-popup" class="open-dialog-btn hint-btn">
+        Åpne popover
+      </button>
+    </div>
+  </div>
 
   <dialog id="demo-dialog">
-    <h2>Dialog title</h2>
-    <p>Dette er en native HTML dialog - ingen JavaScript bibliotek nødvendig!</p>
+    <h2>Viktig melding!</h2>
+    <p>Du må bekrefte denne handlingen før du kan fortsette.</p>
     <form method="dialog">
-      <button class="close-btn">Lukk</button>
+      <button class="close-btn">Bekreft</button>
     </form>
   </dialog>
 
-  <pre><code class="language-css">&lt;dialog id="demo"&gt;
-  &lt;h2&gt;Dialog title&lt;/h2&gt;
-  &lt;p&gt;Content...&lt;/p&gt;
-  &lt;form method="dialog"&gt;
-    &lt;button&gt;Close&lt;/button&gt;
-  &lt;/form&gt;
-&lt;/dialog&gt;
+  <div id="info-popup" popover>
+    <h3>💡 Tips</h3>
+    <p>Dette er bare ekstra info. Klikk hvor som helst utenfor for å lukke!</p>
+  </div>
 
-&lt;button onclick="demo.showModal()"&gt;
-  Open
-&lt;/button&gt;</code></pre>
+  <pre><code class="language-css">&lt;!-- Dialog: Requires action --&gt;
+&lt;dialog&gt;Must click button&lt;/dialog&gt;
+
+&lt;!-- Popover: Easy dismiss --&gt;
+&lt;div popover&gt;Click outside to close&lt;/div&gt;</code></pre>
 </div>

@@ -378,6 +378,36 @@ dialog p {
   transform: translateY(0);
 }
 
+/* Comparison grid (slide 12) */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 2rem;
+}
+
+.comparison-item {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.comparison-item h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  color: var(--dark);
+}
+
+.comparison-item p {
+  margin: 0 0 1.5rem 0;
+  color: var(--dark);
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
 /* Accordion styles (slide 13) */
 .accordion-demo {
   width: 100%;
@@ -449,4 +479,272 @@ dialog p {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Anchor positioning styles (slide 14) */
+.anchor-intro {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.anchor-demo {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  min-height: 200px;
+}
+
+/* Dropdown menu anchor positioning */
+#menu-trigger {
+  anchor-name: --menu;
+}
+
+.dropdown-trigger {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: var(--dark);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'BoitanoFont', sans-serif;
+  transition: transform 0.2s;
+}
+
+.dropdown-trigger:hover {
+  transform: translateY(-2px);
+}
+
+.dropdown-trigger:hover + .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.dropdown-menu {
+  position: fixed;
+  position-anchor: --menu;
+  top: anchor(bottom);
+  left: anchor(left);
+  margin-top: 8px;
+
+  background: white;
+  border: 2px solid var(--dark);
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  min-width: 200px;
+  box-shadow: 0 8px 24px rgba(22, 21, 21, 0.2);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 100;
+}
+
+.dropdown-menu:hover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.menu-item {
+  display: block;
+  padding: 0.75rem 1.5rem;
+  color: var(--dark);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.menu-item:hover {
+  background: rgba(22, 21, 21, 0.05);
+}
+
+.menu-divider {
+  margin: 0.5rem 0;
+  border: none;
+  border-top: 1px solid rgba(22, 21, 21, 0.1);
+}
+
+/* Popover global styles (used in slide 12) */
+[popover] {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  background: white;
+  border: 2px solid var(--dark);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(22, 21, 21, 0.3);
+  max-width: 400px;
+  text-align: center;
+}
+
+[popover]::backdrop {
+  background: rgba(22, 21, 21, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+[popover] h3 {
+  margin: 0 0 1rem 0;
+  color: var(--dark);
+  font-size: 1.5rem;
+}
+
+[popover] p {
+  margin: 0 0 1rem 0;
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* Form validation styles (slide 15) */
+.validation-demo {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid rgba(22, 21, 21, 0.2);
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--dark);
+}
+
+.form-group input:invalid:not(:placeholder-shown) {
+  border-color: #d73a49;
+}
+
+.form-group input:valid:not(:placeholder-shown) {
+  border-color: #28a745;
+}
+
+.error-msg {
+  display: none;
+  color: #d73a49;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.form-group input:invalid:not(:placeholder-shown) ~ .error-msg {
+  display: block;
+}
+
+.validation-demo button[type="submit"] {
+  width: 100%;
+  padding: 1rem;
+  background: var(--dark);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'BoitanoFont', sans-serif;
+  transition: transform 0.2s;
+}
+
+.validation-demo button[type="submit"]:hover {
+  transform: translateY(-2px);
+}
+
+/* Tabs styles (slide 16) */
+.tabs-demo {
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 2rem;
+}
+
+.tabs-demo input[type="radio"] {
+  display: none;
+}
+
+.tab-labels {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0;
+  border-bottom: 2px solid rgba(22, 21, 21, 0.1);
+}
+
+.tab-labels label {
+  padding: 1rem 2rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: rgba(22, 21, 21, 0.6);
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s;
+  user-select: none;
+}
+
+.tab-labels label:hover {
+  color: var(--dark);
+  background: rgba(22, 21, 21, 0.05);
+}
+
+#tab1:checked ~ .tab-labels label[for="tab1"],
+#tab2:checked ~ .tab-labels label[for="tab2"],
+#tab3:checked ~ .tab-labels label[for="tab3"] {
+  color: var(--dark);
+  border-bottom-color: var(--dark);
+}
+
+.tab-content {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 0 0 12px 12px;
+  min-height: 200px;
+}
+
+.tab-panel {
+  display: none;
+  animation: fade-in-up 0.4s ease-out;
+}
+
+#tab1:checked ~ .tab-content .tab-panel:nth-child(1),
+#tab2:checked ~ .tab-content .tab-panel:nth-child(2),
+#tab3:checked ~ .tab-content .tab-panel:nth-child(3) {
+  display: block;
+}
+
+.tab-panel h3 {
+  margin: 0 0 1rem 0;
+  color: var(--dark);
+  font-size: 1.8rem;
+}
+
+.tab-panel p {
+  margin: 0;
+  color: var(--dark);
+  line-height: 1.6;
+  font-size: 1.1rem;
 }

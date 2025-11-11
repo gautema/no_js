@@ -1,0 +1,36 @@
+---
+layout: layout.html
+prevSlide: /slides/slide13/
+nextSlide: /slides/slide15/
+---
+
+<div class="slide">
+  <h1>CSS Anchor Positioning</h1>
+
+  <p class="anchor-intro">Posisjon elementer relativt til hverandre - uten JavaScript!</p>
+
+  <div class="anchor-demo">
+    <button class="dropdown-trigger" id="menu-trigger">Meny ▾</button>
+    <div class="dropdown-menu">
+      <a href="#" class="menu-item">Profil</a>
+      <a href="#" class="menu-item">Innstillinger</a>
+      <a href="#" class="menu-item">Hjelp</a>
+      <hr class="menu-divider">
+      <a href="#" class="menu-item">Logg ut</a>
+    </div>
+  </div>
+
+  <pre><code class="language-css">/* Anchor the button */
+.dropdown-trigger {
+  anchor-name: --menu;
+}
+
+/* Position menu below button */
+.dropdown-menu {
+  position: fixed;
+  position-anchor: --menu;
+  top: anchor(bottom);
+  left: anchor(left);
+  margin-top: 8px;
+}</code></pre>
+</div>

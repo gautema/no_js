@@ -1,0 +1,43 @@
+---
+layout: layout.html
+prevSlide: /slides/slide14/
+nextSlide: /slides/slide16/
+---
+
+<div class="slide">
+  <h1>Form Validering - Uten JS</h1>
+
+  <form class="validation-demo">
+    <div class="form-group">
+      <label for="email">E-post:</label>
+      <input type="email" id="email" required placeholder="din@epost.no">
+      <span class="error-msg">Ugyldig e-postadresse</span>
+    </div>
+
+    <div class="form-group">
+      <label for="age">Alder (18-99):</label>
+      <input type="number" id="age" min="18" max="99" required>
+      <span class="error-msg">Alder må være mellom 18 og 99</span>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Brukernavn (3-12 bokstaver):</label>
+      <input type="text" id="username" pattern="[a-zA-Z]{3,12}" required placeholder="abc">
+      <span class="error-msg">3-12 bokstaver kun</span>
+    </div>
+
+    <button type="submit">Send inn</button>
+  </form>
+
+  <pre><code class="language-css">input:invalid {
+  border-color: red;
+}
+
+input:valid {
+  border-color: green;
+}
+
+&lt;input type="email" required&gt;
+&lt;input type="number" min="18" max="99"&gt;
+&lt;input pattern="[a-zA-Z]{3,12}"&gt;</code></pre>
+</div>

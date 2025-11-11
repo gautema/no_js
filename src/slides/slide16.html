@@ -1,0 +1,44 @@
+---
+layout: layout.html
+prevSlide: /slides/slide15/
+nextSlide: /
+---
+
+<div class="slide">
+  <h1>CSS-only Tabs</h1>
+
+  <div class="tabs-demo">
+    <input type="radio" name="tabs" id="tab1" checked>
+    <input type="radio" name="tabs" id="tab2">
+    <input type="radio" name="tabs" id="tab3">
+
+    <div class="tab-labels">
+      <label for="tab1">HTML</label>
+      <label for="tab2">CSS</label>
+      <label for="tab3">Resultat</label>
+    </div>
+
+    <div class="tab-content">
+      <div class="tab-panel">
+        <h3>HTML</h3>
+        <p>Strukturen til nettsider. Semantisk markup som gir mening til innhold.</p>
+      </div>
+      <div class="tab-panel">
+        <h3>CSS</h3>
+        <p>Styling og layout. Gjør nettsider vakre og responsive.</p>
+      </div>
+      <div class="tab-panel">
+        <h3>Resultat</h3>
+        <p>HTML + CSS = Fantastiske nettsider uten JavaScript!</p>
+      </div>
+    </div>
+  </div>
+
+  <pre><code class="language-css">&lt;input type="radio" name="tabs" id="tab1"&gt;
+&lt;label for="tab1"&gt;Tab 1&lt;/label&gt;
+
+/* Show content when checked */
+#tab1:checked ~ .content .panel-1 {
+  display: block;
+}</code></pre>
+</div>
