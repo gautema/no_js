@@ -1,0 +1,33 @@
+---
+layout: layout.html
+prevSlide: /slides/slide11/
+nextSlide: /slides/slide13/
+---
+
+<div class="slide">
+  <h1>&lt;dialog&gt; - Native modals</h1>
+
+  <button class="open-dialog-btn" onclick="document.getElementById('demo-dialog').showModal()">
+    Åpne dialog
+  </button>
+
+  <dialog id="demo-dialog">
+    <h2>Dialog title</h2>
+    <p>Dette er en native HTML dialog - ingen JavaScript bibliotek nødvendig!</p>
+    <form method="dialog">
+      <button class="close-btn">Lukk</button>
+    </form>
+  </dialog>
+
+  <pre><code class="language-css">&lt;dialog id="demo"&gt;
+  &lt;h2&gt;Dialog title&lt;/h2&gt;
+  &lt;p&gt;Content...&lt;/p&gt;
+  &lt;form method="dialog"&gt;
+    &lt;button&gt;Close&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/dialog&gt;
+
+&lt;button onclick="demo.showModal()"&gt;
+  Open
+&lt;/button&gt;</code></pre>
+</div>

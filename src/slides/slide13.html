@@ -1,0 +1,48 @@
+---
+layout: layout.html
+prevSlide: /slides/slide12/
+nextSlide: /
+---
+
+<div class="slide">
+  <h1>&lt;details&gt; - Accordion uten JS</h1>
+
+  <div class="accordion-demo">
+    <details name="faq">
+      <summary>Hva er HTML?</summary>
+      <p>HTML (HyperText Markup Language) er grunnlaget for alle nettsider. Det strukturerer innhold og gir mening til tekst, bilder og andre elementer.</p>
+    </details>
+
+    <details name="faq">
+      <summary>Hva er CSS?</summary>
+      <p>CSS (Cascading Style Sheets) styrer utseendet til nettsider. Det kontrollerer farger, layout, typografi og animasjoner.</p>
+    </details>
+
+    <details name="faq" open>
+      <summary>Trenger jeg JavaScript?</summary>
+      <p>Ikke alltid! Som denne presentasjonen viser, kan du gjøre mye med bare HTML og CSS. JavaScript er kraftig, men ikke alltid nødvendig.</p>
+    </details>
+  </div>
+
+  <pre><code class="language-css">&lt;!-- Same name = exclusive --&gt;
+&lt;details name="faq"&gt;
+  &lt;summary&gt;Item 1&lt;/summary&gt;
+  &lt;p&gt;Content...&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;details name="faq"&gt;
+  &lt;summary&gt;Item 2&lt;/summary&gt;
+  &lt;p&gt;Content...&lt;/p&gt;
+&lt;/details&gt;
+
+/* Style it with CSS */
+details {
+  border: 1px solid #ccc;
+  padding: 1rem;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: bold;
+}</code></pre>
+</div>

@@ -238,3 +238,215 @@ code[class*="language-"] {
     border-color: white;
   }
 }
+
+/* Dialog styles */
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  border: none;
+  border-radius: 16px;
+  padding: 3rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 60px rgba(22, 21, 21, 0.4);
+  background: white;
+  text-align: center;
+}
+
+dialog::backdrop {
+  background: rgba(22, 21, 21, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+dialog h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 2.2rem;
+  color: var(--dark);
+  font-weight: 700;
+}
+
+dialog p {
+  margin: 0 0 2rem 0;
+  color: var(--dark);
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+/* Spinner animation (slide 3) */
+.spinner {
+  width: 80px;
+  height: 80px;
+  border: 8px solid rgba(22, 21, 21, 0.1);
+  border-top-color: var(--dark);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-top: 2rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Carousel styles (slide 11) */
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  width: 100%;
+  max-width: 700px;
+  padding: 1rem 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--dark) transparent;
+}
+
+.carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel::-webkit-scrollbar-track {
+  background: rgba(22, 21, 21, 0.1);
+  border-radius: 4px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background: var(--dark);
+  border-radius: 4px;
+}
+
+.carousel-item {
+  scroll-snap-align: center;
+  flex: 0 0 600px;
+  height: 250px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Button styles (slide 12) */
+.open-dialog-btn {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background: var(--dark);
+  color: var(--pink);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-family: 'BoitanoFont', sans-serif;
+}
+
+.open-dialog-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(22, 21, 21, 0.3);
+}
+
+.open-dialog-btn:active {
+  transform: translateY(0);
+}
+
+.close-btn {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: var(--dark);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'BoitanoFont', sans-serif;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.close-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(22, 21, 21, 0.3);
+}
+
+.close-btn:active {
+  transform: translateY(0);
+}
+
+/* Accordion styles (slide 13) */
+.accordion-demo {
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.accordion-demo details {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(22, 21, 21, 0.1);
+  border-radius: 8px;
+  padding: 0;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.accordion-demo details[open] {
+  border-color: var(--dark);
+}
+
+.accordion-demo summary {
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--dark);
+  list-style: none;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+.accordion-demo summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-demo summary::before {
+  content: "→";
+  display: inline-block;
+  margin-right: 0.75rem;
+  transition: transform 0.3s;
+  font-size: 1.2rem;
+}
+
+.accordion-demo details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.accordion-demo summary:hover {
+  background: rgba(22, 21, 21, 0.05);
+}
+
+.accordion-demo details p {
+  padding: 0 1.5rem 1.5rem 3.25rem;
+  margin: 0;
+  color: var(--dark);
+  line-height: 1.6;
+  animation: slide-down 0.3s ease-out;
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
