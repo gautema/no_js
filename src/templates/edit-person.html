@@ -1,0 +1,28 @@
+<div class="popover-content">
+  <h3>Rediger {{person.name}}</h3>
+  <form hx-put="/api/people/{{person.id}}" hx-target="#person-{{person.id}}" hx-swap="outerHTML">
+    <div class="form-group">
+      <label>Navn:</label>
+      <input type="text" name="name" value="{{person.name}}" required>
+    </div>
+    <div class="form-group">
+      <label>E-post:</label>
+      <input type="email" name="email" value="{{person.email}}" required>
+    </div>
+    <div class="form-group">
+      <label>Rolle:</label>
+      <input type="text" name="role" value="{{person.role}}" required>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn-save">Lagre</button>
+      <button
+        type="button"
+        class="btn-cancel"
+        hx-get="/api/close-popover/edit"
+        hx-target="#edit-popover"
+        hx-swap="outerHTML">
+        Avbryt
+      </button>
+    </div>
+  </form>
+</div>

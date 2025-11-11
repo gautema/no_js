@@ -1,0 +1,28 @@
+<div class="popover-content">
+  <h3>Legg til person</h3>
+  <form hx-post="/api/people" hx-target="#people-list" hx-swap="beforeend">
+    <div class="form-group">
+      <label>Navn:</label>
+      <input type="text" name="name" required>
+    </div>
+    <div class="form-group">
+      <label>E-post:</label>
+      <input type="email" name="email" required>
+    </div>
+    <div class="form-group">
+      <label>Rolle:</label>
+      <input type="text" name="role" required>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn-save">Legg til</button>
+      <button
+        type="button"
+        class="btn-cancel"
+        hx-get="/api/close-popover/add"
+        hx-target="#add-popover"
+        hx-swap="outerHTML">
+        Avbryt
+      </button>
+    </div>
+  </form>
+</div>

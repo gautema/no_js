@@ -2,12 +2,22 @@ import express from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import path from "path";
 import { fileURLToPath } from "url";
+import fs from "fs";
+import Handlebars from "handlebars";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+const templates = {
+  quote: Handlebars.compile(fs.readFileSync("src/templates/quote.html", "utf8")),
+  people: Handlebars.compile(fs.readFileSync("src/templates/people.html", "utf8")),
+  editPerson: Handlebars.compile(fs.readFileSync("src/templates/edit-person.html", "utf8")),
+  addPerson: Handlebars.compile(fs.readFileSync("src/templates/add-person.html", "utf8")),
+  personRow: Handlebars.compile(fs.readFileSync("src/templates/person-row.html", "utf8")),
+};
 
 // Parse JSON and URL-encoded bodies
 app.use(express.json());
@@ -41,16 +51,7 @@ const quotes = [
 
 app.get("/api/quote", (req, res) => {
   const quote = quotes[Math.floor(Math.random() * quotes.length)];
-  res.send(`
-    <div>
-      <p style="font-size: 1.3rem; font-style: italic; margin-bottom: 0.5rem;">
-        "${quote.text}"
-      </p>
-      <p style="color: #6b7280; text-align: right;">
-        — ${quote.author}
-      </p>
-    </div>
-  `);
+  res.send(templates.quote({ quote }));
 });
 
 // People CRUD endpoints for HTMX demo
@@ -63,34 +64,8 @@ let nextId = 4;
 
 // Get all people (returns HTML table rows)
 app.get("/api/people", (req, res) => {
-  const rows = people
-    .map(
-      (person) => `
-    <tr id="person-${person.id}">
-      <td>${person.name}</td>
-      <td>${person.email}</td>
-      <td>${person.role}</td>
-      <td class="actions">
-        <button
-          class="btn-edit"
-          hx-get="/api/people/${person.id}/edit"
-          hx-target="#edit-popover"
-          hx-swap="innerHTML">
-          Rediger
-        </button>
-        <button
-          class="btn-delete"
-          hx-delete="/api/people/${person.id}"
-          hx-target="#person-${person.id}"
-          hx-swap="outerHTML swap:0.3s">
-          Slett
-        </button>
-      </td>
-    </tr>
-  `
-    )
-    .join("");
-  res.send(rows);
+  const template = Handlebars.compile(fs.readFileSync("src/templates/people.html", "utf8"));
+  res.send(template({ people }));
 });
 
 // Get edit form for a person (popover content)
@@ -100,36 +75,8 @@ app.get("/api/people/:id/edit", (req, res) => {
     return res.status(404).send("<p>Person ikke funnet</p>");
   }
 
-  res.send(`
-    <div class="popover-content">
-      <h3>Rediger ${person.name}</h3>
-      <form hx-put="/api/people/${person.id}" hx-target="#person-${person.id}" hx-swap="outerHTML">
-        <div class="form-group">
-          <label>Navn:</label>
-          <input type="text" name="name" value="${person.name}" required>
-        </div>
-        <div class="form-group">
-          <label>E-post:</label>
-          <input type="email" name="email" value="${person.email}" required>
-        </div>
-        <div class="form-group">
-          <label>Rolle:</label>
-          <input type="text" name="role" value="${person.role}" required>
-        </div>
-        <div class="form-actions">
-          <button type="submit" class="btn-save">Lagre</button>
-          <button
-            type="button"
-            class="btn-cancel"
-            hx-get="/api/close-popover/edit"
-            hx-target="#edit-popover"
-            hx-swap="outerHTML">
-            Avbryt
-          </button>
-        </div>
-      </form>
-    </div>
-  `);
+  const template = Handlebars.compile(fs.readFileSync("src/templates/edit-person.html", "utf8"));
+  res.send(template({ person }));
 });
 
 // Close popover endpoint
@@ -141,36 +88,8 @@ app.get("/api/close-popover/:type", (req, res) => {
 
 // Get add form (popover content)
 app.get("/api/people/new", (req, res) => {
-  res.send(`
-    <div class="popover-content">
-      <h3>Legg til person</h3>
-      <form hx-post="/api/people" hx-target="#people-list" hx-swap="beforeend">
-        <div class="form-group">
-          <label>Navn:</label>
-          <input type="text" name="name" required>
-        </div>
-        <div class="form-group">
-          <label>E-post:</label>
-          <input type="email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label>Rolle:</label>
-          <input type="text" name="role" required>
-        </div>
-        <div class="form-actions">
-          <button type="submit" class="btn-save">Legg til</button>
-          <button
-            type="button"
-            class="btn-cancel"
-            hx-get="/api/close-popover/add"
-            hx-target="#add-popover"
-            hx-swap="outerHTML">
-            Avbryt
-          </button>
-        </div>
-      </form>
-    </div>
-  `);
+  const template = Handlebars.compile(fs.readFileSync("src/templates/add-person.html", "utf8"));
+  res.send(template({}));
 });
 
 // Add a new person
@@ -179,7 +98,10 @@ app.post("/api/people", (req, res) => {
   const newPerson = { id: nextId++, name, email, role };
   people.push(newPerson);
 
-  res.send(`<tr id="person-${newPerson.id}"><td>${newPerson.name}</td><td>${newPerson.email}</td><td>${newPerson.role}</td><td class="actions"><button class="btn-edit" hx-get="/api/people/${newPerson.id}/edit" hx-target="#edit-popover" hx-swap="innerHTML">Rediger</button><button class="btn-delete" hx-delete="/api/people/${newPerson.id}" hx-target="#person-${newPerson.id}" hx-swap="outerHTML swap:0.3s">Slett</button></td></tr>
+  const template = Handlebars.compile(fs.readFileSync("src/templates/person-row.html", "utf8"));
+  const html = template({ person: newPerson });
+
+  res.send(`${html}
 <div hx-swap-oob="beforeend:#toast-container"><div class="toast success"><strong>${newPerson.name}</strong> ble lagt til!</div></div>
 <div id="add-popover" hx-swap-oob="outerHTML"></div>`);
 });
@@ -199,8 +121,11 @@ app.put("/api/people/:id", (req, res) => {
   person.email = req.body.email || person.email;
   person.role = req.body.role || person.role;
 
+  const template = Handlebars.compile(fs.readFileSync("src/templates/person-row.html", "utf8"));
+  const html = template({ person });
+
   // Close the popover and return updated row
-  res.send(`<tr id="person-${person.id}"><td>${person.name}</td><td>${person.email}</td><td>${person.role}</td><td class="actions"><button class="btn-edit" hx-get="/api/people/${person.id}/edit" hx-target="#edit-popover" hx-swap="innerHTML">Rediger</button><button class="btn-delete" hx-delete="/api/people/${person.id}" hx-target="#person-${person.id}" hx-swap="outerHTML swap:0.3s">Slett</button></td></tr>
+  res.send(`${html}
 <div hx-swap-oob="beforeend:#toast-container"><div class="toast success"><strong>${person.name}</strong> ble oppdatert!</div></div>
 <div id="edit-popover" hx-swap-oob="outerHTML"></div>`);
 });

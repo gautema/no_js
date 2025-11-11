@@ -1,0 +1,23 @@
+{{#each people}}
+<tr id="person-{{this.id}}">
+  <td>{{this.name}}</td>
+  <td>{{this.email}}</td>
+  <td>{{this.role}}</td>
+  <td class="actions">
+    <button
+      class="btn-edit"
+      hx-get="/api/people/{{this.id}}/edit"
+      hx-target="#edit-popover"
+      hx-swap="innerHTML">
+      Rediger
+    </button>
+    <button
+      class="btn-delete"
+      hx-delete="/api/people/{{this.id}}"
+      hx-target="#person-{{this.id}}"
+      hx-swap="outerHTML swap:0.3s">
+      Slett
+    </button>
+  </td>
+</tr>
+{{/each}}
