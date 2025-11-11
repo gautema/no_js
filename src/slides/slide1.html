@@ -1,0 +1,82 @@
+---
+layout: layout.html
+title: Slide 1 - Interactive Demo
+prevSlide: /
+---
+
+<div class="slide">
+  <h1>Interactive JavaScript Demo</h1>
+  <canvas id="myCanvas" width="400" height="400"></canvas>
+  <button id="animateBtn">Animate</button>
+
+  <script>
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+    const btn = document.getElementById("animateBtn");
+
+    let x = 50;
+    let y = 50;
+    let dx = 2;
+    let dy = 2;
+
+    function drawBall() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.beginPath();
+      ctx.arc(x, y, 20, 0, Math.PI * 2);
+      ctx.fillStyle = "#667eea";
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    function animate() {
+      x += dx;
+      y += dy;
+
+      if (x + 20 > canvas.width || x - 20 < 0) dx = -dx;
+      if (y + 20 > canvas.height || y - 20 < 0) dy = -dy;
+
+      drawBall();
+      requestAnimationFrame(animate);
+    }
+
+    drawBall();
+    btn.addEventListener("click", animate);
+  </script>
+
+  <style>
+    .slide {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #f0f0f0;
+      gap: 2rem;
+    }
+
+    .slide h1 {
+      color: #333;
+    }
+
+    canvas {
+      border: 2px solid #333;
+      background: white;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #764ba2;
+    }
+  </style>
+</div>
