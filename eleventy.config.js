@@ -10,7 +10,23 @@ export default function(eleventyConfig) {
           // Proxy to backend server
           const targetUrl = `http://localhost:3001${req.url}`;
           try {
-            const response = await fetch(targetUrl);
+            // Collect request body if present
+            let body = '';
+            if (req.method !== 'GET' && req.method !== 'HEAD') {
+              await new Promise((resolve) => {
+                req.on('data', chunk => body += chunk);
+                req.on('end', resolve);
+              });
+            }
+
+            const response = await fetch(targetUrl, {
+              method: req.method,
+              headers: {
+                'Content-Type': req.headers['content-type'] || 'application/x-www-form-urlencoded',
+              },
+              body: body || undefined
+            });
+
             const data = await response.text();
             res.writeHead(response.status, {
               'Content-Type': response.headers.get('content-type') || 'text/html'

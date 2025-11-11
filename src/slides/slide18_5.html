@@ -1,0 +1,332 @@
+---
+layout: layout.html
+prevSlide: /slides/slide18/
+nextSlide: /slides/slide19/
+---
+
+<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+
+<style>
+  .crud-demo {
+    margin: 2rem 0;
+  }
+
+  .add-person-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .add-person-header h2 {
+    margin: 0;
+  }
+
+  .btn-add {
+    padding: 0.75rem 1.5rem;
+    background: #10b981;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .btn-add:hover {
+    background: #059669;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+    color: #374151;
+  }
+
+  .form-group input {
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+  .people-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .people-table th {
+    background: #374151;
+    color: white;
+    padding: 1rem;
+    text-align: left;
+  }
+
+  .people-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .people-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .people-table .actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    padding: 0.4rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .btn-edit {
+    background: #3b82f6;
+    color: white;
+  }
+
+  .btn-edit:hover {
+    background: #2563eb;
+  }
+
+  .btn-delete {
+    background: #ef4444;
+    color: white;
+  }
+
+  .btn-delete:hover {
+    background: #dc2626;
+  }
+
+  #edit-popover,
+  #add-popover {
+    display: none;
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    min-width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+  }
+
+  #edit-popover:has(.popover-content),
+  #add-popover:has(.popover-content) {
+    display: block;
+    animation: fadeInPopover 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeInPopover {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  #edit-popover h3,
+  #add-popover h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #374151;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .btn-save,
+  .btn-cancel {
+    padding: 0.6rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .btn-save {
+    background: #10b981;
+    color: white;
+  }
+
+  .btn-save:hover {
+    background: #059669;
+  }
+
+  .btn-cancel {
+    background: #6b7280;
+    color: white;
+  }
+
+  .btn-cancel:hover {
+    background: #4b5563;
+  }
+
+  .code-section {
+    margin-top: 2rem;
+  }
+
+  .code-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  #toast-container {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 400px;
+    pointer-events: none;
+  }
+
+  .toast {
+    padding: 1.25rem 1.75rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid #10b981;
+    min-width: 320px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    overflow: hidden;
+    pointer-events: auto;
+    animation: toastInOut 6s ease-out forwards;
+  }
+
+  @keyframes toastInOut {
+    0% {
+      transform: translateX(450px);
+      opacity: 0;
+    }
+    8% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    85% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    92% {
+      transform: translateX(450px);
+      opacity: 0;
+    }
+    92.01% {
+      transform: translateX(450px);
+      opacity: 0;
+      max-height: 200px;
+      margin-bottom: 0.75rem;
+      padding-top: 1.25rem;
+      padding-bottom: 1.25rem;
+    }
+    100% {
+      transform: translateX(450px);
+      opacity: 0;
+      max-height: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .toast::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: inherit;
+  }
+
+  .toast strong {
+    color: #1f2937;
+    font-weight: 600;
+  }
+
+  .toast.success {
+    background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 100%) !important;
+    border-left-color: #10b981;
+  }
+
+  .toast.success::after {
+    content: "✓";
+    font-size: 1.25rem;
+    color: #10b981;
+    font-weight: bold;
+    order: -1;
+    width: 28px;
+    height: 28px;
+    background: #d1fae5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+<div class="slide">
+  <h1>HTMX - CRUD Eksempel</h1>
+
+  <div class="crud-demo">
+    <div class="add-person-header">
+      <h2>Personer</h2>
+      <button
+        class="btn-add"
+        hx-get="/api/people/new"
+        hx-target="#add-popover"
+        hx-swap="innerHTML"
+      >
+        + Legg til person
+      </button>
+    </div>
+
+    <table class="people-table">
+      <thead>
+        <tr>
+          <th>Navn</th>
+          <th>E-post</th>
+          <th>Rolle</th>
+          <th>Handlinger</th>
+        </tr>
+      </thead>
+      <tbody id="people-list" hx-get="/api/people" hx-trigger="load">
+        <!-- People loaded here via HTMX -->
+      </tbody>
+    </table>
+  </div>
+
+  <div id="edit-popover"></div>
+
+  <div id="add-popover"></div>
+</div>
+
+<div id="toast-container"></div>
